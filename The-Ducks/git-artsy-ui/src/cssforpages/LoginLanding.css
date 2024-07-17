@@ -1,4 +1,4 @@
-.app-container {
+/* .app-container {
     display: flex;
     justify-content: center;
   }
@@ -6,9 +6,35 @@
   .login-container {
     flex: 1;
     margin-right: 20px; /* Adjust margin as needed for spacing */
+  /* } */
+  
+  /* .popup-container {
+    flex: 1;
+  }
+   */ */
+
+   .app-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full height of the viewport */
+    padding: 20px; /* Add padding if needed */
+    box-sizing: border-box; /* Ensure padding is included in the element's total width and height */
+  }
+  
+  .login-container {
+    flex: 1;
+    max-width: 400px; /* Maximum width for the login container */
+    margin-right: 20px; /* Adjust margin as needed for spacing */
   }
   
   .popup-container {
     flex: 1;
+    max-width: 400px; /* Maximum width for the popup container */
+  }
+  
+  .popup img {
+    width: 100%;
+    border-radius: 10px;
   }
   
