@@ -1,14 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-    <App />
-);
-
 const express = require('express');
 const cors = require('cors');
 const app = express();
@@ -23,6 +12,7 @@ const corsOptions = {
 
 // Apply CORS middleware
 app.use(cors(corsOptions));
+app.use(express.json());  // Add this line to parse JSON bodies
 
 // Example API route for login
 app.post('/gitartsy/api/register/login', (req, res) => {
@@ -34,7 +24,3 @@ app.post('/gitartsy/api/register/login', (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
 });
-
-
-
-
