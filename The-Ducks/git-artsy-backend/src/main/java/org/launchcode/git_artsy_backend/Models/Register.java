@@ -32,6 +32,10 @@ public class Register {
     @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 
+    @Column
+    private Boolean usingOAuth2 = false;
+
+
     public Register() {
         // Default constructor
     }
