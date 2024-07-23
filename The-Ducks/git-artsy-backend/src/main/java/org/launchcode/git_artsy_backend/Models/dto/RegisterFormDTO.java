@@ -2,12 +2,15 @@ package org.launchcode.git_artsy_backend.Models.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
-public class LoginDto {
+public class RegisterFormDTO {
     @NotBlank
     private String username;
 
     @NotBlank
     private String password;
+
+    @NotBlank
+    private String verifyPassword;
 
     // Getters and Setters
     public String getUsername() {
@@ -24,5 +27,13 @@ public class LoginDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getVerifyPassword() {
+        return verifyPassword;
+    }
+
+    public void setVerifyPassword(String verifyPassword) {
+        this.verifyPassword = verifyPassword;
     }
 }

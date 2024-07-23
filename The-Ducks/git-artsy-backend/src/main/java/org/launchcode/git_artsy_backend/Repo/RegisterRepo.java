@@ -1,5 +1,6 @@
 package org.launchcode.git_artsy_backend.Repo;
 
+import jakarta.servlet.http.HttpSession;
 import org.launchcode.git_artsy_backend.Models.Artworks;
 import org.launchcode.git_artsy_backend.Models.Register;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,5 +13,5 @@ import java.util.Optional;
 @Repository
 public interface RegisterRepo extends JpaRepository<Register, Integer> {
     Register findByEmail(String email);
-
+    Register findByUsername(String username); // Add this line
 }
