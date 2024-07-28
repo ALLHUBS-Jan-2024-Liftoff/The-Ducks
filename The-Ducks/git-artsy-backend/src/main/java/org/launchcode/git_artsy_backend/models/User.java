@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 //@MappedSuperclass
 @Entity
-public abstract class User {
+public class User {
 
     @Id
     @GeneratedValue

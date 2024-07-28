@@ -5,18 +5,14 @@ import { Link } from "react-router-dom";
 //TODO Include logic for if user is logged in or not
 const Banner = () => {
     return (
-        <div class='header'>
+        <div className='header'>
             <h1>gitArtsy</h1>
             <nav>
-                <a>git_Inspired</a>
-                <a>Find Artists</a>
-                <a><Link to='/'>Login</Link></a>
+                <Link to='/git_inspired'>git_Inspired</Link>
+                <Link to='/find_artists'>Find Artists</Link>
+                <Link to='/'>Login</Link>
             </nav>
         </div>
     );
 };
-
-
-
-
 export default Banner
