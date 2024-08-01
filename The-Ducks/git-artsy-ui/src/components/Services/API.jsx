@@ -1,23 +1,23 @@
 
-import axios from 'axios';
+// import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8082/api/register';
+// const API_BASE_URL = 'http://localhost:8082/api/register';
 
-const api = axios.create({
-  baseURL: API_BASE_URL,
-  withCredentials: true,
-});
+// const api = axios.create({
+//   baseURL: API_BASE_URL,
+//   withCredentials: true,
+// });
 
-export const register = (userData) => {
-  return api.post('/save', userData);
-};
+// export const register = (userData) => {
+//   return api.post('/save', userData);
+// };
 
-export const login = (userData) => {
-  return api.post('/login', userData);
-};
+// export const login = (userData) => {
+//   return api.post('/login', userData);
+// };
 
-export const logout = () => {
-  return api.get('/logout');
-};
+// export const logout = () => {
+//   return api.get('/logout');
+// };
 
-export default api;
+// export default api;

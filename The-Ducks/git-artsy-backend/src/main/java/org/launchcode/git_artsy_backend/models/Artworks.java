@@ -15,16 +15,13 @@ public class Artworks {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer productId;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "profile_id", nullable = false)
-    private Profile profile;
-
     private String title;
     private String description;
     private Float price;
-    private String imageUrl;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "profile_id", nullable = false)
+    private Profile profile;
 
     @ManyToMany
     @JoinTable(
@@ -34,14 +31,26 @@ public class Artworks {
     )
     private List<Tag> tags = new ArrayList<>();
 
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
+    private String filename;
+    private String fileDownloadUri;
+    private String fileType;
+    private long size;
+
     public Artworks() {}
 
-    public Artworks(Profile profile, String title, String description, Float price, String imageUrl) {
+    public Artworks(Profile profile, String title, String description, Float price, String filename, String fileDownloadUri, String fileType, long size) {
         this.profile = profile;
         this.title = title;
         this.description = description;
         this.price = price;
-        this.imageUrl = imageUrl;
+
+        this.filename = filename;
+        this.fileDownloadUri = fileDownloadUri;
+        this.fileType = fileType;
+        this.size = size;
         this.createdAt = LocalDateTime.now();
         this.updatedAt = LocalDateTime.now();
     }
@@ -86,13 +95,7 @@ public class Artworks {
         this.price = price;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
 
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 
     public LocalDateTime getCreatedAt() {
         return createdAt;
@@ -121,5 +124,37 @@ public class Artworks {
     @PreUpdate
     public void preUpdate() {
         this.updatedAt = LocalDateTime.now();
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
+    }
+
+    public String getFileDownloadUri() {
+        return fileDownloadUri;
+    }
+
+    public void setFileDownloadUri(String fileDownloadUri) {
+        this.fileDownloadUri = fileDownloadUri;
+    }
+
+    public String getFileType() {
+        return fileType;
+    }
+
+    public void setFileType(String fileType) {
+        this.fileType = fileType;
+    }
+
+    public long getSize() {
+        return size;
+    }
+
+    public void setSize(long size) {
+        this.size = size;
     }
 }

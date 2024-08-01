@@ -1,21 +1,39 @@
 
-import { useState } from 'react';
+
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 
 import Home from './components/Home/Home';
+
+
 import LandingLogin from './components/LoginLandingPage/LoginLanding';
-import Signup from './components/SignUpPage/SignUpPage'
+
+import UploadArtwork from './components/UploadArtwork/UploadArtwork'; 
+import Sample from './components/UploadArtwork/sample'; 
+import SampleList from './components/UploadArtwork/samplelist'; 
+import ArtworksList from './components/UploadArtwork/ArtworkList';
+import Tag from './components/Tag/Tag'; 
 
 const App = () => {
   return (
+   
+
     <Router>
-      <Routes>
-        <Route path="/home" element={ <Home/> } />
-        <Route path="/" element={ <LandingLogin /> } />
-        <Route path='/signup' element={ <Signup/> }/>
-      </Routes>
-    </Router>
+    <Routes>
+        <Route path="/" element={<LandingLogin />} />
+        <Route path="/home" element={<Home />} />
+        
+        <Route path="/uploadartwork" element={<Home><UploadArtwork /></Home>} />
+        <Route path="/artworkslist" element={<Home><ArtworksList /></Home>} />
+        <Route path="/tags" element={<Home><Tag /></Home>} />
+
+        <Route path="/sample" element={<Home><Sample /></Home>} />
+        <Route path="/samplelist" element={<Home><SampleList /></Home>} />
+        
+    </Routes>
+  </Router>
+
+    
   );
 };
 
