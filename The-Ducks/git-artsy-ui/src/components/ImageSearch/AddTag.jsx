@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 
 // AddTag component allows users to add a new tag to an image
 const AddTag = ({ addTag }) => {
@@ -28,10 +27,6 @@ const AddTag = ({ addTag }) => {
       <button type="submit">Add Tag</button>
     </form>
   );
-};
-
-AddTag.propTypes = {
-  addTag: PropTypes.func.isRequired,
 };
 
 export default AddTag;
