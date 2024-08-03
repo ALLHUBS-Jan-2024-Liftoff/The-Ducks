@@ -45,7 +45,8 @@ public class SecurityConfig implements WebMvcConfigurer{
                 }))
                 .csrf(AbstractHttpConfigurer::disable)  // Disabling CSRF protection
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/gitartsy/api/register/save", "/gitartsy/api/register/login", "/gitartsy/api/tags/**", "/gitartsy/api/artworks/**").permitAll()
+                        .requestMatchers("/gitartsy/api/register/save", "/gitartsy/api/register/login", "/gitartsy/api/tags/**",
+                                "/gitartsy/api/artworks/**", "/uploads/**").permitAll()
                         .anyRequest().authenticated()  // Require authentication for any other requests
                 );
         return http.build();
@@ -70,4 +71,14 @@ public class SecurityConfig implements WebMvcConfigurer{
                 .addResourceLocations("file:" + uploadPath + "/");
     }
 
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//        registry.addResourceHandler("/uploads/**")
+//                .addResourceLocations("file:/path/to/uploads/");
+//    }
+
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**").allowedOrigins("http://localhost:5173");
+    }
 }

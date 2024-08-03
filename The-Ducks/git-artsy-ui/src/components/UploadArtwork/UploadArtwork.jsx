@@ -4,37 +4,38 @@ import { useNavigate } from 'react-router-dom';
 import '../UploadArtwork/UploadArtwork.css';
 import tagservice from '../Services/TagService.js';
 
-const UploadArtwork = ({ onUploadSuccess }) => {
+const UploadArtwork = ({onUploadSuccess}) => {
+
     const [formData, setFormData] = useState({
         title: '',
         description: '',
         price: '',
         tagIds: []
     });
+
     const [tags, setTags] = useState([]);
     const [selectedFile, setSelectedFile] = useState(null);
-    //const [errorMessage, setErrorMessage] = useState('');
+        const [uploading, setUploading] = useState(false);
     const [error, setError] = useState("");
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [preview, setPreview] = useState("");
-    const [uploading, setUploading] = useState(false);
+    
 
     useEffect(() => {
         const fetchTags = async () => {
             try {
                 const response = await tagservice.getAllTags();
-                if (response.data) {
-                    setTags(response.data);
-                } else {
-                    setTags([]);
-                }
+                
+                setTags(response.data);
             } catch (error) {
                 console.error("Error fetching tags:", error);
+                setTags([]);
             }
         };
 
         fetchTags();
+
 
         const userData = JSON.parse(localStorage.getItem('user'));
         if (userData) {
@@ -67,7 +68,7 @@ const UploadArtwork = ({ onUploadSuccess }) => {
     };
 
     const handleFileChange = (e) => {
-        //setSelectedFile(e.target.files[0]);
+        
         const selectedFile = e.target.files[0];
         if (selectedFile) {
             setSelectedFile(selectedFile);
@@ -87,23 +88,19 @@ const UploadArtwork = ({ onUploadSuccess }) => {
         setUploading(true);
 
         const formDataToSend = new FormData();
+
         formDataToSend.append('title', formData.title);
         formDataToSend.append('description', formData.description);
         formDataToSend.append('price', formData.price);
-        formDataToSend.append('tagIds', JSON.stringify(formData.tagIds));
+        //formDataToSend.append('tagIds', JSON.stringify(formData.tagIds)); 
+        formDataToSend.append('tagIds', formData.tagIds.join(','));
+        formDataToSend.append('image', selectedFile);
+        formDataToSend.append('profileId', user.userid);
 
-        
-
-        if (selectedFile) {
-            formDataToSend.append('image', selectedFile);
-        }
-
-        if (user && user.userid) {
-            formDataToSend.append('profileId', user.userid);
-        } else {
-            setError('User not found. Please log in again.');
-            return;
-        }
+        // Log FormData content for debugging
+        formDataToSend.forEach((value, key) => {
+        console.log(`${key}: ${value}`);
+        });
 
         try {
             await api.uploadArtwork(formDataToSend);
@@ -117,7 +114,10 @@ const UploadArtwork = ({ onUploadSuccess }) => {
             alert("File uploaded successfully");
             setSelectedFile(null);
             setPreview("");
-            onUploadSuccess();
+            if (onUploadSuccess && typeof onUploadSuccess === 'function') {
+                onUploadSuccess();
+            }
+            
             navigate('/artworkslist'); 
         } catch (error) {
             setError('Failed to upload artwork');
@@ -150,39 +150,32 @@ const UploadArtwork = ({ onUploadSuccess }) => {
                     Upload Image:
                     <input type="file" name="image" onChange={handleFileChange} />
                 </label>
-                
-                {/* <button
-                type="submit"
-                disabled={uploading} 
-                style={{ marginTop: '10px' }}
-                >
-                 {uploading ? 'Uploading...' : 'Upload'}
-                 </button> */}
-                 {preview && <img src={preview} alt="Preview" style={{ marginTop: '10px', width: '200px', height: 'auto' }} />}
-                 {error && <p style={{ color: 'red' }}>{error}</p>}
+                {preview && <img src={preview} alt="Preview" style={{ marginTop: '10px', width: '200px', height: 'auto' }} />}
+                {error && <p style={{ color: 'red' }}>{error}</p>}
                 <br />
                 <label>
-                    Tags:
-                    <div>
-                        {tags.length > 0 ? (
-                            tags.map(tag => (
-                                <div key={tag.tagId} className="checkbox-item">
-                                    <input
-                                        type="checkbox"
-                                        value={tag.tagId}
-                                        checked={formData.tagIds.includes(tag.tagId)}
-                                        onChange={handleTagChange}
-                                    />
-                                    <label htmlFor={`tag-${tag.tagId}`} className="checkbox-label">
-                                        {tag.name}
-                                    </label>
-                                </div>
-                            ))
-                        ) : (
-                            <p>No tags available</p>
-                        )}
-                    </div>
-                </label>
+    Tags:
+    <div>
+        {tags.length > 0 ? (
+            tags.map(tag => (
+                <div key={tag.tagId} className="checkbox-item">
+                    <input
+                        type="checkbox"
+                        id={`tag-${tag.tagId}`} // Unique id for each checkbox
+                        value={tag.tagId}
+                        checked={formData.tagIds.includes(tag.tagId)}
+                        onChange={handleTagChange}
+                    />
+                    <label htmlFor={`tag-${tag.tagId}`} className="checkbox-label">
+                        {tag.name}
+                    </label>
+                </div>
+            ))
+        ) : (
+            <p>No tags available</p>
+        )}
+    </div>
+</label>
                 <br />
                 <button type="submit">Upload Artwork</button>
             </form>
