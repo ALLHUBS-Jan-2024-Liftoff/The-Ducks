@@ -9,7 +9,7 @@ const Banner = () => {
         <div className='header'>
             <h1>gitArtsy</h1>
             <nav>
-                <a>git_Inspired</a>
+                <Link to='/gallery'>git_Inspired</Link>
                 <Link to ='/search'>Search</Link>
                 <Link to='/'>Login</Link>
             </nav>

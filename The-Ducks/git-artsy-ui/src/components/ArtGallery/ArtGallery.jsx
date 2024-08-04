@@ -16,12 +16,11 @@ const ArtGallery= () => {
         const data = response.data.data;
         const newArtworks = data.map(artwork => ({
           id: artwork.id,
-          imageUrl: `https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`
+          imageUrl: `https://www.artic.edu/iiif/2/${artwork.image_id}/full/843,/0/default.jpg`,
+          title: artwork.title
         }));
         const shuffledArtworks = newArtworks.sort(() => Math.random() * artworks.length);
         setArtworks(shuffledArtworks);
-        const randomIndex = Math.floor(Math.random() * artworks.length);
-        setCurrentIndex(randomIndex);
       } catch (error) {
         console.error('Error fetching artworks:', error);
       }
@@ -37,8 +36,7 @@ const ArtGallery= () => {
     //         return;
     //     }
     
-    //     const randomIndex = Math.floor(Math.random() * artworks.length);
-    //     const artwork = artworks[randomIndex];
+   
     //     const imageUrl = `https://www.artic.edu/iiif/2/${artworks}/full/843,/0/default.jpg`;
     //     const imgElement = document.getElementById('artwork');
     //     imgElement.src = imageUrl;
@@ -49,18 +47,30 @@ const ArtGallery= () => {
 
     // })
    
+    const randomIndex = Math.floor(Math.random() * artworks.length);
+   // const artwork = artworks[randomIndex];
+    const  artworkToShow = artworks[randomIndex];
 
-    const  artworkToShow = artworks[currentIndex + Math.floor(Math.random() * artworks.length)];
+ 
+    const next = () => {
+        setCurrentIndex((prevIndex) =>
+            prevIndex === artworkToShow.length - 1 ? 0 : prevIndex + 1
+        );
+    };
+ 
 
-    
-  
   
     return (
       <>
         {artworkToShow && (
-          <div className="gallery">
+          <><div className="gallery">
             <img src={artworkToShow.imageUrl} />
-          </div>
+            <div>
+            <caption>{artworkToShow.title}</caption>
+            </div>
+            <div>
+            <button onClick={next}>Next</button>
+            </div></div></>
         )}
       </>
     );
