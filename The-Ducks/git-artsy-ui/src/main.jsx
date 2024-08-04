@@ -7,6 +7,7 @@ import LandingLogin from './components/LoginLandingPage/LoginLanding.jsx';
 import SignUpPage from './components/SignUpPage/SignUpPage.jsx';
 import SearchPage from './components/SearchPage/SearchPage.jsx'
 import Gallery from './components/ArtGallery/Gallery.jsx';
+import ProfilePage from './components/ProfilePage/ProfilePage.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -18,9 +19,13 @@ const router = createBrowserRouter([
   },
   {path:'/search',
     element: <SearchPage /> 
+  },
   {
     path:'/gallery',
     element: <Gallery />
+  },
+  {path: '/profile',
+    element: <ProfilePage />
   }
 ]);
 
