@@ -2,7 +2,7 @@ import Banner from "../Banner";
 
 import React, { useEffect, useState } from 'react';
 import api from '../../services/artworkService'; 
-
+import axios from "axios";
 
 const ArtworkList = () => {
     const [artworks, setArtworks] = useState([]);

@@ -1,6 +1,7 @@
 import Banner from "../Banner";
 import ArtGallery from "./ArtGallery";
 import './ArtGallery.css';
+import UserArt from './UserArt';
 
 
 const Gallery = () => {
@@ -13,6 +14,8 @@ const Gallery = () => {
             <ArtGallery />
             <div>
                 <h3>From your Fellow Artist:</h3>
+            <UserArt />
+
             </div>
         </div>
     )
