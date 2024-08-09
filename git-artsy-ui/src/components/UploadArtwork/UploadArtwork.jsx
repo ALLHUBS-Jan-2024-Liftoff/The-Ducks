@@ -150,7 +150,7 @@ const UploadArtwork = ({onUploadSuccess}) => {
                 <br />
                 <label>
                     Price:
-                    <input type="number" name="price" value={formData.price} onChange={handleChange} required />
+                    <input type="number" name="price" value={formData.price} onChange={handleChange} />
                 </label>
                 <br />
                 <label>
