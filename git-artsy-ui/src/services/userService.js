@@ -12,13 +12,18 @@ export const registerUser = async (
     
 ) => {
     try {
+        console.log(username); 
+        console.log(email); 
+        console.log(password); 
+        console.log(verifyPassword); 
+        console.log(role); 
         const response = await axios.post(`${BASEAPIURL}/api/user/newUser`,
-            { username, email, password, verifyPassword, role },
+            { username, email, password, role, verifyPassword },
             { withCredentials: true }
         );
-        return response.data;
+        return response;
     } catch (error) {
-        console.error("There was an error creating this user", error);
+        //console.error("There was an error creating this user", error);
         throw error;
     }
  };

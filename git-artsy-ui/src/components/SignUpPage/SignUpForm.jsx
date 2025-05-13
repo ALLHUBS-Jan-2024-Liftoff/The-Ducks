@@ -48,9 +48,9 @@ export const SignUpForm = () => {
                         </input>
                         </label>
                     </div>
-                    <div className="form-group">
+                    {/* <div className="form-group">
                         <label for="user-type">Account Type:
-                            <label>  
+                            <label >  
                             <input type="radio" name="user-type" value="ARTIST" id="artist" onChange={(e) => setRole(e.target.value)}></input>
                         Artist</label>
                             
@@ -58,7 +58,33 @@ export const SignUpForm = () => {
                             <input type="radio" name="user-type" value="PATRON" id="patron" onChange={(e) => setRole(e.target.value)}></input>
                         Patron</label>
                         </label>
+                    </div> */}
+                    <div className="form-group">
+                        <label>Account Type:</label>
+                            <label htmlFor="artist">
+                            <input
+                            type="radio"
+                            name="user-type"
+                            value="ARTIST"
+                            id="artist"
+                            onChange={(e) => setRole(e.target.value)}
+                            required
+                            />
+                            Artist
+                            </label>
+                            
+                            <label htmlFor="patron">
+                            <input
+                            type="radio"
+                            name="user-type"
+                            value="PATRON"
+                            id="patron"
+                            onChange={(e) => setRole(e.target.value)}
+                            />
+                            Patron
+                            </label>
                     </div>
+
                     <button type='submit'>Submit</button>
                 </form>
                 {message && <p>{message}</p>}

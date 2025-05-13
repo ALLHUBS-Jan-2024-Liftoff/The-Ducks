@@ -7,8 +7,10 @@ public class RegisterDTO{
     private String username;
     private String email;
     private String password;
-    private String role;
+
     private String verifyPassword;
+
+    private String role;
 
     public static boolean isValid(String email)
     {

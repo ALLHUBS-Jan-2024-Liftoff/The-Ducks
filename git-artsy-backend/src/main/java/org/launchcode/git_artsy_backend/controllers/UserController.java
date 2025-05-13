@@ -52,6 +52,14 @@ public class UserController {
     @PostMapping("/newUser")
     public ResponseEntity<Map> processRegistrationForm(@RequestBody RegisterDTO registerDTO,
                                                        HttpServletRequest request)  {
+        System.out.println("Role received: " + registerDTO.getRole());
+
+        System.out.println("Username: " + registerDTO.getUsername());
+        System.out.println("Email: " + registerDTO.getEmail());
+        System.out.println("Password: " + registerDTO.getPassword());
+        System.out.println("VerifyPassword: " + registerDTO.getVerifyPassword());
+
+
         ResponseEntity response = null;
         Map<String, String> responseBody = new HashMap<>();
         try{
